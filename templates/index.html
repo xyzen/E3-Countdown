@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://use.typekit.net/fct7vgw.css">
+		<style>
+			.background {
+			  background-image: url("static/background.png");
+			  background-repeat: no-repeat;
+			  background-color: #000;
+			  height: 900px;
+			  width: 1600px;
+			  margin: 0px auto;
+			}
+			.container {
+			  position: relative;
+			  height: 100%;
+			  width: 100%;
+			  margin: 0px auto;
+			}
+			.vertical-center {
+			  margin: 0px auto;
+			  position: absolute;
+			  width: 100%;
+			  top: 77%;
+			  -ms-transform: translateY(-50%);
+			  transform: translateY(-50%);
+			  font-family: adobe-garamond-pro, serif;
+			  font-weight: 700;
+			  font-style: normal;
+			  font-size: 32;
+			  color: #fff;
+			  text-align: center;
+			  text-shadow: 4px 0 0 #000, 0 -4px 0 #000, 0 4px 0 #000, -4px 0 0 #000;
+			}
+		</style>
+	</head>
+
+	<body id="main" class="background">
+		<div class="container">
+			<div id="clock" class="vertical-center">
+				<h1 style="margin: 0px">{{ delta }}</h1>
+				<h2 style="display: inline">UNTIL</h2>
+				<h1 style="display: inline">E3</h1>
+			</div>
+		</div>
+	</body>
+
+	<script>
+	    var element = document.getElementById("main");
+		element.scrollTop = element.scrollHeight;
+		element.scrollLeft = element.scrollLeftMax / 2;
+
+	    var clock = document.getElementById("clock");
+	    setInterval(function(){
+	    	fetch("{{ url_for('index') }}")
+	        	.then(response => {
+	                response.text().then(t => {clock.innerHTML = t})
+	        });
+	    }, 1000);
+	</script>
+</html>
